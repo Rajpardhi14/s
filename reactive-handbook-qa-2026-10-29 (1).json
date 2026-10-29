@@ -1,0 +1,29 @@
+{
+  "app": "reactive-handbook",
+  "version": 1,
+  "exportedAt": "2026-10-29T12:45:10.098Z",
+  "items": [
+    {
+      "section": "sec-forms",
+      "sectionTitle": "Forms",
+      "q": "What is FormGroup in Angular?",
+      "a": "A FormGroup is used to group multiple form controls into a single object and manage their values, validation, and status together.",
+      "code": "import { Component } from '@angular/core';\nimport {\n  FormControl,\n  FormGroup,\n  ReactiveFormsModule\n} from '@angular/forms';\n\n@Component({\n  selector: 'app-employee',\n  standalone: true,\n  imports: [ReactiveFormsModule],\n  templateUrl: './employee.component.html'\n})\nexport class EmployeeComponent {\n\n  employeeForm = new FormGroup({\n    name: new FormControl(''),\n    email: new FormControl(''),\n    department: new FormControl('')\n  });\n\n  submitForm(): void {\n    console.log(this.employeeForm.value);\n  }\n}\n\n\n\n\n<form [formGroup]=\"employeeForm\" (ngSubmit)=\"submitForm()\">\n\n  <label>Employee Name</label>\n  <input type=\"text\" formControlName=\"name\" />\n\n  <label>Email</label>\n  <input type=\"email\" formControlName=\"email\" />\n\n  <label>Department</label>\n  <input type=\"text\" formControlName=\"department\" />\n\n  <button type=\"submit\">Submit</button>\n\n</form>",
+      "lang": "js",
+      "ts": 1793254216913
+    },
+    {
+      "section": "sec-forms",
+      "sectionTitle": "Forms",
+      "q": "setValue() vs patchValue() in Angular FormGroup.",
+      "a": "1)setValue() updates all controls in the FormGroup. You must provide values for every control.\n\n\n2)patchValue() updates only the controls you specify. Other controls remain unchanged.",
+      "code": "-Use patchValue() when an API returns only some fields you need to populate.\nthis.challanForm.setValue({\n  bank_bsr_code: '1234567',\n  challan_no: '10025',\n  challan_date: '2026-10-29'\n});\n\n\n-Use setValue() when you have the complete form data and want Angular to enforce the expected control structure.\n\nthis.challanForm.patchValue({\n  bank_bsr_code: '1234567',\n  challan_no: '10025'\n});",
+      "lang": "js",
+      "ts": 1793254423719
+    }
+  ],
+  "notes": {
+    "js-template-literals": "\n        <span class=\"eyebrow\">Strings</span>\n        <h3>Template literals</h3>\n        <p>Template literals are a way to create strings in JavaScript using backticks (`) instead of single quotes (' ') or double quotes (\" \").</p><p>They make it easier to:</p><p>1. Insert variables into strings using ${}.</p><p>2. Write strings across multiple lines.</p><p>3. Perform expressions directly inside strings.</p>\n        <pre><code><span class=\"c-kw\">const</span> name = 'Ram';\n<span class=\"c-kw\">const</span> msg = `Hello ${name}, you have ${<span class=\"c-num\">3</span> + <span class=\"c-num\">2</span>} <span class=\"c-kw\">new</span> messages<span class=\"c-str\">`;\n\nconst html = `</span>\n  &lt;div <span class=\"c-kw\">class</span>=\"card\"&gt;\n    &lt;h2&gt;${name}&lt;/h2&gt;\n  &lt;/div&gt;`;</code></pre>\n        <p><b>Tagged templates</b> pass the string parts and values to a function first, e.g. <code>html`&lt;p&gt;${x}&lt;/p&gt;`</code> in some libraries, to escape or process values.</p>\n      ",
+    "js-promise-combinators": "\n        <span class=\"eyebrow\">Async</span>\n        <h3>Promise.all, allSettled, race &amp; any</h3><div>Promise.all() — Returns results when all Promises succeed; rejects if any Promise fails.</div><div><br></div><div>Promise.allSettled() — Waits for all Promises to finish and returns the status and result of each Promise, whether successful or failed.</div><div><br></div><div>Promise.race() — Returns the result of the first Promise to settle, whether it succeeds or fails.</div><div><br></div><div>Promise.any() — Returns the result of the first Promise to succeed; rejects with an AggregateError if all Promises fail.</div>\n        <div class=\"table-wrap\">\n          <table><thead><tr><th></th><th></th><th><br></th></tr></thead><tbody><tr><td></td><td></td><td><br></td></tr>\n              <tr><td><br></td><td><br></td><td><br></td></tr>\n            </tbody>\n          </table>\n        </div>\n        <pre><code><span class=\"c-kw\">const</span> [users, products] = <span class=\"c-kw\">await</span> <span class=\"c-fn\">Promse</span>.<span class=\"c-fn\">all</span>([\n  <span class=\"c-fn\">fetch</span>('/api/users<span class=\"c-str\">').then(r =&gt; r.json()),\n  fetch('</span>/api/products<span class=\"c-str\">').then(r =&gt; r.json())\n]);\n\nconst results = await Promise.allSettled([saveA(), saveB()]);\nconst failed = results.filter(r =&gt; r.status === '</span>rejected<span class=\"c-str\">');\n\nconst report = await Promise.race([\n  fetch('</span>/api/report<span class=\"c-str\">'),\n  new Promise((_, reject) =&gt; setTimeout(() =&gt; reject(new Error('</span>Timeout')), <span class=\"c-num\">5000</span>))\n]);</code></pre>\n        <div class=\"usecase\"><b>RxJS equivalents:</b> <code>Promise.all</code> is like <a href=\"#forkjoin\">forkJoin</a>; <code>Promise.race</code> is like <a href=\"#race\">race</a>.</div>\n      "
+  }
+}
